@@ -14,6 +14,7 @@ const FormSubmit = ({title = '', onSubmit = () => {}, isDisabled = false}) => {
         display: 'flex',
         opacity: isDisabled ? 0.7 : 1,
         justifyContent: 'center',
+        borderRadius: 8,
       }}>
       <Text
         style={{

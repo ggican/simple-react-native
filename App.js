@@ -1,27 +1,24 @@
 import * as React from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+// navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {StoreProvider} from './src/reducers/index';
-import Login from './src/screens/Login';
-import SplashScreen from './src/screens/SplashScreen';
-import SettingScreen from './src/screens/SettingScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+// reducer
 import {useStore} from './src/reducers';
-import AsyncStorage from '@react-native-community/async-storage';
+import {StoreProvider} from './src/reducers/index';
 import {servicesAction} from './src/reducers';
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+import {NavigationTab} from './src/navigations';
 
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
-    </Tab.Navigator>
-  );
-}
+// pages
+import Login from './src/screens/Login';
+import SplashScreen from './src/screens/SplashScreen';
+
+// variable navigation
+const Stack = createStackNavigator();
 
 const ApplicationScreen = () => {
   const [states, setState] = React.useState({
@@ -47,7 +44,6 @@ const ApplicationScreen = () => {
     };
     checkAuth();
   }, []);
-  console.log(state.user.token, 'masauk sini');
   return (
     <Stack.Navigator>
       {states.isLoading ? (
@@ -62,7 +58,7 @@ const ApplicationScreen = () => {
           }}
         />
       ) : (
-        <Stack.Screen name="Simple Screen" component={MyTabs} />
+        <Stack.Screen name="Simple Screen" component={NavigationTab} />
       )}
     </Stack.Navigator>
   );

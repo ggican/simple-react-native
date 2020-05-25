@@ -1,6 +1,5 @@
 import service from '../../services';
 import AsyncStorage from '@react-native-community/async-storage';
-// import localStorage from "../../utils/local-storage";
 
 const testing = (dispatch, value) => {
   dispatch(value);
@@ -42,6 +41,12 @@ const login = async (dispatch, value) => {
     });
   }
 };
+const logout = async (dispatch, value) => {
+  try {
+    await AsyncStorage.removeItem('userToken');
+  } catch (exception) {}
+  dispatch(value);
+};
 
 const clearData = (dispatch, value) => {
   dispatch(value);
@@ -79,6 +84,9 @@ const servicesAction = (dispatch) => ({
   },
   reduxLogin: (value) => {
     login(dispatch, value);
+  },
+  reduxLogout: (value) => {
+    logout(dispatch, value);
   },
   reduxSetToken: (value) => {
     setToken(dispatch, value);

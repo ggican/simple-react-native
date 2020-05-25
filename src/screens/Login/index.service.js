@@ -31,6 +31,14 @@ const service = {
       },
     });
   },
+  postLoginClear: ({dispatch}) => {
+    servicesAction(dispatch).reduxClear({
+      reducer: 'service',
+      group: 'user',
+      key: 'auth',
+      type: 'CLEAR',
+    });
+  },
 };
 
 export default service;

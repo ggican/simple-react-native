@@ -4,16 +4,9 @@ import FormInput from '../../components/Form/FormInput';
 import FormSubmit from '../../components/Form/FormSubmit';
 import FixedPositionView from '../../components/FixedPositionView';
 import Container from '../../components/Container';
+import Loading from '../../components/Loading';
 import {useStore} from '../../reducers';
 import service from './index.service.js';
-const getDataPokemon = () => {
-  service.pokemonList({dispatch, params: params});
-  setParams({
-    offset: params.offset + params.limit,
-    limit: 10,
-  });
-  setLoading(true);
-};
 
 const Login = () => {
   const {dispatch, state} = useStore();
@@ -24,7 +17,7 @@ const Login = () => {
       isError: false,
       value: '',
     },
-    username: {
+    handphone: {
       isError: false,
       value: '',
     },
@@ -43,11 +36,12 @@ const Login = () => {
     let isError = onCheckFormError(form);
     if (!isError) {
       setLoading(true);
+
       service.postLogin({
         dispatch,
         data: {
-          phoneNumber: '1234567890',
-          password: 'hi',
+          phoneNumber: form.handphone.value,
+          password: form.password.value,
         },
       });
     }
@@ -56,8 +50,6 @@ const Login = () => {
   const onGetDataLogin = (isLoading, user) => {
     if (isLoading && user?.auth) {
       const {success, message} = user.auth;
-      if (success) {
-      }
       if (message) {
         ToastAndroid.showWithGravity(
           message.text,
@@ -65,6 +57,7 @@ const Login = () => {
           ToastAndroid.TOP,
         );
       }
+      service.postLoginClear({dispatch});
       setLoading(false);
     }
   };
@@ -86,11 +79,12 @@ const Login = () => {
 
   return (
     <Container style={{flex: 1}}>
+      <Loading status={isLoading}></Loading>
       <ScrollView>
         <FormInput
-          placeholder="Username"
-          label="Username"
-          name="username"
+          placeholder="1234xxxx"
+          label="Handphone"
+          name="handphone"
           onGetValue={onGetValue}></FormInput>
         <FormInput
           label="Password"
