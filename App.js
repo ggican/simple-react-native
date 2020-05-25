@@ -58,7 +58,7 @@ const ApplicationScreen = () => {
           }}
         />
       ) : (
-        <Stack.Screen name="Simple Screen" component={NavigationTab} />
+        <Stack.Screen name="Simple" component={NavigationTab} />
       )}
     </Stack.Navigator>
   );

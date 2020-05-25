@@ -35,7 +35,7 @@ const NavigationTab = () => {
       <Tab.Screen
         name="Settings"
         options={{
-          title: 'Your Settings',
+          title: 'Settings',
         }}
         component={SettingScreen}
       />
