@@ -8,5 +8,6 @@ export default {
     CONFLICT: 409,
     INTERNAL_SERVICE_ERROR: 500,
     ADD_TO_PURCHASE: "ADD_TO_PURCHASE",
+    SET_TOKEN:"SET_TOKEN"
     CLEAR: "CLEAR",
 };
